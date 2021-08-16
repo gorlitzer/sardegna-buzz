@@ -1,0 +1,40 @@
+.home-component {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 70vh;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+
+  .button {
+    box-shadow: inset 0px 1px 0px 0px #bee2f9;
+    background-color: #63b8ee;
+    border-radius: 6px;
+    border: 1px solid #3866a3;
+    display: inline-block;
+    cursor: pointer;
+    color: #14396a;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #7cacde;
+    margin: 1rem;
+
+    &:hover {
+      background-color: #468ccf;
+    }
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+
+    a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+  }
+}

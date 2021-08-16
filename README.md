@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 I'm bootstraping the app with CRA for fast prototyping, but the **CRA** library develops a bare project with a `"@babel/core"` dependency conflict. In order to work-around this issue it is needed to change, in `the package.json`'s, version to `"@babel/core": "^7.13.0"`
 
-### [eslint CRA configuration](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
+### 1. [eslint CRA configuration](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
 
 ```
 // custom linting configuration (in package.json◊)
@@ -31,12 +31,15 @@ I'm bootstraping the app with CRA for fast prototyping, but the **CRA** library 
   },
 ```
 
-- `npm run lint` -> runs the eslinter to check and fix linting errors;
+- COMMAND: `npm run lint` -> runs the eslinter to check and fix linting errors;
+
+
+### 1. [react router for SPA development](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
 
 ### V1 npm packages - external necessary libraries
 
 ```
 node-sass // SCSS compiler for webpack bundle
 sass
-react-router-dom
+react-router-dom // SPA management
 ```
