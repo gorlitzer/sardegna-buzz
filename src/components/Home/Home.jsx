@@ -9,7 +9,8 @@ const Home = () => {
         <Link to="/game">START GAME</Link>
       </button>
       <button className="button">
-      <Link to="/leaderboard">VIEW LEADERBOARD</Link></button>
+        <Link to="/leaderboard">VIEW LEADERBOARD</Link>
+      </button>
     </div>
   );
 };
