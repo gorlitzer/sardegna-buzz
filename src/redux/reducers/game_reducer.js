@@ -3,6 +3,7 @@ import { CLEAN_STATE, START_GAME } from "../constants/types";
 const initialState = {
   color: null,
   is_playing: false,
+  countdown_timer: 3000
 };
 
 export function game_reducer(state = initialState, action) {
