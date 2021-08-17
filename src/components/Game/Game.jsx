@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Buzz from "../../images/buzz.svg";
 import BuzzSVG from "../BuzzSVG";
 
 import "./style.scss";

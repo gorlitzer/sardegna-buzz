@@ -18,3 +18,8 @@ code {
   --primary: #22DC87;
   --secondary: #0e157a;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
