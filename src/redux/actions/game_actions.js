@@ -4,6 +4,7 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
+  STOP_TIMER
 } from "../constants/types";
 
 export const cleanStates = () => {
@@ -27,6 +28,13 @@ export const setModal = () => {
 export const setIsPlaying = () => {
   return {
     type: HANDLE_TIME,
+  };
+};
+
+export const onClickBuzz = (color) => {
+  return {
+    type: STOP_TIMER,
+    choosen_color: color
   };
 };
 

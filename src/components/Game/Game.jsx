@@ -8,7 +8,12 @@ import Countdown from "../Countdown";
 
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
-import { startNewGame, setIsPlaying } from "../../redux/actions/game_actions";
+import {
+  startNewGame,
+  setIsPlaying,
+  onClickBuzz,
+  setModal
+} from "../../redux/actions/game_actions";
 
 // service imports
 import game_services from "../../services/game_services";
@@ -16,8 +21,8 @@ import game_services from "../../services/game_services";
 import "./style.scss";
 
 const Game = () => {
-  const [modal, setModal] = useState(false); // modal boolean state
-  const dispatch = useDispatch(); // initialize dispatcher
+  const dispatch = useDispatch();
+  const buzz_state = useSelector((state) => state.buzz); // redux state getter
 
   useEffect(() => {
     // 1. calculate delay (range 0.5-1.5)
@@ -35,18 +40,15 @@ const Game = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const toggle = () => setModal(!modal); // toggle modal true or false
-
   return (
     <div className="game-component">
-      {/* Back button and score view - UI elements */}
-      <UIelements toggleModal={() => toggle(false)} />
-      {/* Buzz-light */}
+      <UIelements toggleModal={() => dispatch(setModal())} />
       <Buzzlight />
-      {/* Buzz input buttons */}
       <BuzzButtons />
       {/* Custom modal */}
-      <Modal show={modal} onClose={() => toggle(false)} />
+      <Modal show={buzz_state.show_modal} title={'Modale cazzo'}>
+        <h1>cazzo</h1>
+      </Modal>
     </div>
   );
 };
@@ -56,11 +58,12 @@ const UIelements = ({ toggleModal }) => {
 
   return (
     <div>
+      {/* Back button and score view - UI elements */}
       <div className="helper-container">
         <h3>
           <Link to="/">← EXIT</Link>
         </h3>
-        <h3>SCORE: 100</h3>
+        <h3>SCORE: 0</h3>
       </div>
       <div className="helper-container">
         <Countdown
@@ -77,37 +80,40 @@ const Buzzlight = () => {
 
   return (
     <div className="buzz">
+      {/* Buzz-light */}
       <BuzzSVG infill={buzz_state.color ?? "#e0e0e0"} />
     </div>
   );
 };
 
+// Memoized functional stateless component
 const BuzzButtons = memo(() => {
+  const dispatch = useDispatch(); // initialize dispatcher
 
   const buzz_buttons = [
     {
       id: 1,
       tag: "red",
       infill: "#ff0000",
-      onClick: () => console.log("red"),
+      onClick: () => dispatch(onClickBuzz("#ff0000")),
     },
     {
       id: 2,
       tag: "blue",
       infill: "#0037ff",
-      onClick: () => console.log("blue"),
+      onClick: () => dispatch(onClickBuzz("#0037ff")),
     },
     {
       id: 3,
       tag: "green",
       infill: "#10ff00",
-      onClick: () => console.log("green"),
+      onClick: () => dispatch(onClickBuzz("#10ff00")),
     },
     {
       id: 4,
       tag: "yellow",
       infill: "#e5de10",
-      onClick: () => console.log("yellow"),
+      onClick: () => dispatch(onClickBuzz("#e5de10")),
     },
   ];
 
@@ -119,6 +125,7 @@ const BuzzButtons = memo(() => {
 
   return (
     <div className="flex-row">
+      {/* Buzz input buttons */}
       {shuffled.map((item, i) => (
         <div className="buzz-button" key={item.id} onClick={item.onClick}>
           <BuzzSVG className="buzz-button" infill={item.infill} />
@@ -126,6 +133,6 @@ const BuzzButtons = memo(() => {
       ))}
     </div>
   );
-})
+});
 
 export default Game;

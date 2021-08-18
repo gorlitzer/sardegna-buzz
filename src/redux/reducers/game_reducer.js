@@ -4,6 +4,7 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
+  STOP_TIMER,
 } from "../constants/types";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   countdown_timer: 0,
   game_over: false,
   show_modal: false,
+  winning: false,
   current_level: 0,
 };
 
@@ -43,6 +45,23 @@ export function game_reducer(state = initialState, action) {
         ...state,
         show_modal: !state.show_modal,
       };
+    // Click buzz button handler
+    case STOP_TIMER:
+      if (action.choosen_color === state.color) {
+        return {
+          ...state,
+          is_playing: false,
+          winning: true,
+          current_level: state.current_level + 1,
+          show_modal: true,
+        };
+      } else {
+        return {
+          ...state,
+          is_playing: false,
+          show_modal: true,
+        };
+      }
     // Clean up states
     case CLEAN_STATE:
       return initialState;

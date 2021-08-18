@@ -24,20 +24,20 @@ const Countdown = ({ value, toggleModal }) => {
   useInterval(
     () => {
       let prev = prevTime ? prevTime : Date.now();
-      let diffTime = Date.now() - prev; // delta T con tick precedente
-      let newMilliTime = timeInMilliseconds - diffTime; // calcolo differenziale su valore parametro
+      let diffTime = Date.now() - prev; // delta T - previous tick
+      let newMilliTime = timeInMilliseconds - diffTime; // param difference calculation
       let newTime = toTime(newMilliTime);
       setPrevTime(Date.now());
       setTimeInMilliseconds(newMilliTime);
       setTime(newTime);
       if (newMilliTime <= 0) {
-        // non sempre è preciso, lo step potrebbe sorpassare lo zero
+        // non sempre è preciso, lo step potrebbe sorpassare lo zero!
         setPrevTime(null);
         dispatch(gameOver());
         toggleModal();
       }
     },
-    buzz_state.is_playing ? 10 : null // per mettere lo step in pausa
+    buzz_state.is_playing ? 10 : null // to pause step
   );
 
   const toTime = (time) => {
