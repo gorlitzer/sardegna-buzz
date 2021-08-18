@@ -4,12 +4,12 @@ import useInterval from "../../hooks/useInterval";
 
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
-import { setIsPlaying } from "../../redux/actions/game_actions";
+import { gameOver } from "../../redux/actions/game_actions";
 
 // forked codepen - https://codesandbox.io/s/24xmm6n530?file=/src/index.js
 // stackoverflow - https://stackoverflow.com/a/55748441
 
-const Countdown = ({ value }) => {
+const Countdown = ({ value, toggleModal }) => {
   const [prevTime, setPrevTime] = useState(null);
   const [timeInMilliseconds, setTimeInMilliseconds] = useState(value);
   const [time, setTime] = useState(null);
@@ -32,8 +32,9 @@ const Countdown = ({ value }) => {
       setTime(newTime);
       if (newMilliTime <= 0) {
         // non sempre è preciso, lo step potrebbe sorpassare lo zero
-        dispatch(setIsPlaying());
         setPrevTime(null);
+        dispatch(gameOver());
+        toggleModal();
       }
     },
     buzz_state.is_playing ? 10 : null // per mettere lo step in pausa
@@ -50,7 +51,7 @@ const Countdown = ({ value }) => {
   };
 
   return (
-    <div>
+    <div style={{ height: "50px" }}>
       {time && (
         <h2
           style={{ color: "red" }}

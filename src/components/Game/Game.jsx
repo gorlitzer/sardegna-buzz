@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const Game = () => {
   return (
     <div className="game-component">
       {/* Back button and score view - UI elements */}
-      <UIelements />
+      <UIelements toggleModal={() => toggle(false)} />
       {/* Buzz-light */}
       <Buzzlight />
       {/* Buzz input buttons */}
@@ -51,7 +51,7 @@ const Game = () => {
   );
 };
 
-const UIelements = () => {
+const UIelements = ({ toggleModal }) => {
   const buzz_state = useSelector((state) => state.buzz); // redux state getter
 
   return (
@@ -63,7 +63,10 @@ const UIelements = () => {
         <h3>SCORE: 100</h3>
       </div>
       <div className="helper-container">
-        <Countdown value={buzz_state.countdown_timer} />
+        <Countdown
+          value={buzz_state.countdown_timer}
+          toggleModal={toggleModal}
+        />
       </div>
     </div>
   );
@@ -79,32 +82,37 @@ const Buzzlight = () => {
   );
 };
 
-const BuzzButtons = () => {
-  let buzz_buttons = [
+const BuzzButtons = memo(() => {
+
+  const buzz_buttons = [
     {
       id: 1,
       tag: "red",
       infill: "#ff0000",
+      onClick: () => console.log("red"),
     },
     {
       id: 2,
       tag: "blue",
       infill: "#0037ff",
+      onClick: () => console.log("blue"),
     },
     {
       id: 3,
       tag: "green",
       infill: "#10ff00",
+      onClick: () => console.log("green"),
     },
     {
       id: 4,
       tag: "yellow",
       infill: "#e5de10",
+      onClick: () => console.log("yellow"),
     },
   ];
 
   // Schwartzian transform JavaScript implementation - https://stackoverflow.com/a/46545530
-  let shuffled = buzz_buttons
+  const shuffled = buzz_buttons
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
@@ -112,12 +120,12 @@ const BuzzButtons = () => {
   return (
     <div className="flex-row">
       {shuffled.map((item, i) => (
-        <div className="buzz-button" key={item.id}>
+        <div className="buzz-button" key={item.id} onClick={item.onClick}>
           <BuzzSVG className="buzz-button" infill={item.infill} />
         </div>
       ))}
     </div>
   );
-};
+})
 
 export default Game;

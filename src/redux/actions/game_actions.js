@@ -1,4 +1,10 @@
-import { CLEAN_STATE, START_GAME, HANDLE_TIME } from "../constants/types";
+import {
+  CLEAN_STATE,
+  START_GAME,
+  HANDLE_TIME,
+  GAME_OVER,
+  TOGGLE_MODAL,
+} from "../constants/types";
 
 export const cleanStates = () => {
   return {
@@ -6,6 +12,17 @@ export const cleanStates = () => {
   };
 };
 
+export const gameOver = () => {
+  return {
+    type: GAME_OVER,
+  };
+};
+
+export const setModal = () => {
+  return {
+    type: TOGGLE_MODAL,
+  };
+};
 
 export const setIsPlaying = () => {
   return {
@@ -17,6 +34,6 @@ export const startNewGame = (curr_color, curr_timer) => {
   return {
     type: START_GAME,
     color: curr_color,
-    countdown_timer: curr_timer
+    countdown_timer: curr_timer,
   };
 };
