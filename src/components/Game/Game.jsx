@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import BuzzSVG from "../BuzzSVG";
 import Modal from "../Modal";
-//import Countdown from "../Countdown";
+import Countdown from "../Countdown";
 
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
-import { startNewGame } from "../../redux/actions/game_actions";
+import { startNewGame, setIsPlaying } from "../../redux/actions/game_actions";
 
 // service imports
 import game_services from "../../services/game_services";
@@ -19,7 +19,6 @@ const Game = () => {
   const [modal, setModal] = useState(false); // modal boolean state
   const dispatch = useDispatch(); // initialize dispatcher
 
-  // async with useEffect hook - https://dev.to/danialdezfouli/what-s-wrong-with-the-async-function-in-useeffect-4jne
   useEffect(() => {
     // 1. calculate delay (range 0.5-1.5)
     const delay = game_services.getRandomTimer(5, 15);
@@ -28,7 +27,8 @@ const Game = () => {
     // 2. dispatch 'start game' action after timeout
     const timer = setTimeout(async () => {
       const curr_color = await game_services.getRandomColor();
-      dispatch(startNewGame(curr_color));
+      dispatch(startNewGame(curr_color, delay * 100));
+      dispatch(setIsPlaying());
     }, delay * 100); // {[5,15]*100}=[500,1500] (random number range)
 
     // Cleanup timeout
@@ -52,6 +52,8 @@ const Game = () => {
 };
 
 const UIelements = () => {
+  const buzz_state = useSelector((state) => state.buzz); // redux state getter
+
   return (
     <div>
       <div className="helper-container">
@@ -61,7 +63,7 @@ const UIelements = () => {
         <h3>SCORE: 100</h3>
       </div>
       <div className="helper-container">
-        {/* <Countdown value={3000} /> */}
+        <Countdown value={buzz_state.countdown_timer} />
       </div>
     </div>
   );
@@ -109,10 +111,10 @@ const BuzzButtons = () => {
 
   return (
     <div className="flex-row">
-      {shuffled.map((item,i) => (
+      {shuffled.map((item, i) => (
         <div className="buzz-button" key={item.id}>
-        <BuzzSVG className="buzz-button" infill={item.infill} />
-      </div>
+          <BuzzSVG className="buzz-button" infill={item.infill} />
+        </div>
       ))}
     </div>
   );
