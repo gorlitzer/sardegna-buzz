@@ -18,7 +18,7 @@ const Leaderboard = () => {
           </tr>
         </thead>
         {leaderboar_state.topTen.map((item, i) => (
-          <tbody key={item.id}>
+          <tbody key={i}>
             <tr>
               <td>{item.name}</td>
               <td>{item.score}</td>

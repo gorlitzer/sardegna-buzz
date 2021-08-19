@@ -3,7 +3,6 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 100vw;
-  height: 70vh;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -26,6 +25,7 @@
 
     th,
     td {
+      text-transform: uppercase;
       border: 1px solid black;
       padding: 8px;
     }

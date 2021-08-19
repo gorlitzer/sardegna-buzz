@@ -1,12 +1,31 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import SquareSVG from "../SquareSVG";
 
 // redux imports
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateLeaderboard } from "../../redux/actions/leaderboard_actions";
 
-const Body = () => {
-  const buzz_state = useSelector((state) => state.buzz); // redux state getter
+const Body = ({ title }) => {
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+  const [wizardShow, setWizardShow] = useState(false);
+
+  const buzz_state = useSelector((state) => state.buzz); // buzz states
+  const leaderboard_state = useSelector((state) => state.board); // buzz states
+
+  const score = localStorage.getItem("currentScore"); // current score
+
+  const onChangeHandler = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const onNameSubmit = (event) => {
+    event.preventDefault();
+    dispatch(updateLeaderboard(inputValue, score));
+    setWizardShow(!wizardShow);
+  };
 
   return (
     <section className="modal-body">
@@ -31,9 +50,52 @@ const Body = () => {
           <SquareSVG infill={buzz_state.choosen_color ?? "#e0e0e0"} />
         </li>
         <li>
-          <h4>Earned points:&nbsp;{buzz_state.round_points} </h4>
+          {title === "SUCCESS" ? (
+            <h4>Earned points:&nbsp;{buzz_state.round_points} </h4>
+          ) : (
+            <h4>Total score:&nbsp;{score} </h4>
+          )}
         </li>
       </ul>
+      {title !== "SUCCESS" && score > leaderboard_state.topTen[9].score ? (
+        <div className="notify">
+          {/* STEP 1 */}
+          {wizardShow ? (
+            <button className="modal-button">
+              {leaderboard_state.isRecord ? (
+                <Link to="/leaderboard">
+                  <h2>
+                    It is a <span className="anim">RECORD!!!</span>
+                  </h2>
+                  <h5>Click to go to leaderboard</h5>
+                </Link>
+              ) : (
+                <h4>
+                  <Link to="/leaderboard">← GO TO LEADERBOARD</Link>
+                </h4>
+              )}
+            </button>
+          ) : (
+            <>
+              <h4>Top 10 entry:</h4>
+              <div className="item">
+                <input
+                  type="text"
+                  name="name"
+                  maxLength={3}
+                  autoComplete="off"
+                  placeholder="3 Letter Name"
+                  onChange={onChangeHandler}
+                  value={inputValue}
+                />
+                <button onClick={onNameSubmit}>Submit</button>
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        ""
+      )}
     </section>
   );
 };

@@ -44,7 +44,7 @@ const Modal = ({
           <h2 className={`modal-title ${titleColor}`}>{title}</h2>
         </div>
         {/*  BODY */}
-        <ModalComponents.Body />
+        <ModalComponents.Body title={title}/>
         {/* FOOTER */}
         <ModalComponents.Footer
           title={title}

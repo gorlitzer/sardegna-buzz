@@ -8,26 +8,4 @@
     margin: 1rem auto;
     //height: 100vh;  /* Se setto anche height va a centro pagina */
   }
-
-  .anim {
-    animation: color-change 2s infinite;
-  }
-}
-
-@keyframes color-change {
-  0% {
-    color: red;
-  }
-  25% {
-    color: green;
-  }
-  50% {
-    color: blue;
-  }
-  75% {
-    color: orange;
-  }
-  100% {
-    color: red;
-  }
 }

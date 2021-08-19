@@ -1,13 +1,6 @@
-import { SET_LEADERBOARD } from "../constants/types";
+import { SET_LEADERBOARD, UPDATE_LEADERBOARD } from "../constants/types";
 
 const axios = require("axios");
-
-export const setLeaderboard = (array) => {
-  return {
-    type: SET_LEADERBOARD,
-    payload: array,
-  };
-};
 
 export const getLeaderboardAsync = () => {
   return (dispatch) => {
@@ -17,5 +10,20 @@ export const getLeaderboardAsync = () => {
         dispatch(setLeaderboard(data));
       })
       .catch((error) => console.log(error));
+  };
+};
+
+export const setLeaderboard = (array) => {
+  return {
+    type: SET_LEADERBOARD,
+    payload: array,
+  };
+};
+
+export const updateLeaderboard = (name, score) => {
+  return {
+    type: UPDATE_LEADERBOARD,
+    name: name,
+    score: score
   };
 };
