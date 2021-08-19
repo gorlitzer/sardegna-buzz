@@ -9,10 +9,9 @@ import { gameOver } from "../../redux/actions/game_actions";
 // forked codepen - https://codesandbox.io/s/24xmm6n530?file=/src/index.js
 // stackoverflow - https://stackoverflow.com/a/55748441
 
-const Countdown = ({ value, toggleModal }) => {
+const Countdown = ({ value, toggleModal, time, setTime }) => {
   const [prevTime, setPrevTime] = useState(null);
   const [timeInMilliseconds, setTimeInMilliseconds] = useState(value);
-  const [time, setTime] = useState(null);
 
   const buzz_state = useSelector((state) => state.buzz); // redux state getter
   const dispatch = useDispatch(); // initialize dispatcher
@@ -37,7 +36,7 @@ const Countdown = ({ value, toggleModal }) => {
         toggleModal();
       }
     },
-    buzz_state.is_playing ? 10 : null // to pause step
+    buzz_state.is_playing ? 10 : null // pause step
   );
 
   const toTime = (time) => {

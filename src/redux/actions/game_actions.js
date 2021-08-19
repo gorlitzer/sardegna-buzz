@@ -4,8 +4,15 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
-  STOP_TIMER
+  STOP_TIMER,
+  STOPWATCH
 } from "../constants/types";
+
+export const stopwatch = () => {
+  return {
+    type: STOPWATCH,
+  };
+};
 
 export const cleanStates = () => {
   return {
@@ -13,9 +20,10 @@ export const cleanStates = () => {
   };
 };
 
-export const gameOver = () => {
+export const gameOver = (time) => {
   return {
     type: GAME_OVER,
+    current_time: '0'
   };
 };
 
@@ -31,10 +39,11 @@ export const setIsPlaying = () => {
   };
 };
 
-export const onClickBuzz = (color) => {
+export const onClickBuzz = (color, time) => {
   return {
     type: STOP_TIMER,
-    choosen_color: color
+    choosen_color: color,
+    click_time: time.milliseconds
   };
 };
 

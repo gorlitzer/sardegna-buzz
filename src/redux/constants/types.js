@@ -4,4 +4,5 @@ export const HANDLE_TIME = "HANDLE_TIME";
 export const GAME_OVER = "GAME_OVER";
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
 export const STOP_TIMER = "STOP_TIMER";
+export const STOPWATCH = "STOPWATCH";
 

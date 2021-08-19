@@ -5,16 +5,20 @@ import {
   GAME_OVER,
   TOGGLE_MODAL,
   STOP_TIMER,
+  STOPWATCH
 } from "../constants/types";
 
 const initialState = {
-  color: null,
-  is_playing: false,
-  countdown_timer: 0,
-  game_over: false,
-  show_modal: false,
-  winning: false,
-  current_level: 0,
+  color: null, // buzz random color
+  is_playing: false, // round started
+  countdown_timer: 0, // settled timer
+  click_time: 0, // elapsed time since click
+  game_over: false, // game over
+  show_modal: false, // toggle modal
+  winning: false, // winning round
+  choosen_color: null, // clicked color
+  current_level: 0, // level helper for 'countdown_timer' decrease
+  score: 0, // current player score
 };
 
 export function game_reducer(state = initialState, action) {
@@ -32,12 +36,13 @@ export function game_reducer(state = initialState, action) {
         ...state,
         is_playing: !state.is_playing,
       };
-    // Game over handler
+    // Game over handler - sets current click time
     case GAME_OVER:
       return {
         ...state,
         is_playing: false,
         game_over: true,
+        click_time: action.time,
       };
     // Game modal handler
     case TOGGLE_MODAL:
@@ -54,14 +59,24 @@ export function game_reducer(state = initialState, action) {
           winning: true,
           current_level: state.current_level + 1,
           show_modal: true,
+          click_time: action.click_time,
+          choosen_color: action.choosen_color
         };
       } else {
         return {
           ...state,
           is_playing: false,
           show_modal: true,
+          click_time: action.click_time,
+          choosen_color: action.choosen_color
         };
       }
+    // Start and stop timer
+    case STOPWATCH:
+      return {
+        ...state,
+        is_playing: !state.is_playing,
+      };
     // Clean up states
     case CLEAN_STATE:
       return initialState;

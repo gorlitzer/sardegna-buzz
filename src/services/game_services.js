@@ -9,7 +9,9 @@ const getRandomColor = () => {
   return rand;
 };
 
-export default {
+const game_services = {
   getRandomTimer,
   getRandomColor,
 };
+
+export default game_services;
