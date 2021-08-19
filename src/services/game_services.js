@@ -1,5 +1,5 @@
 const getRandomTimer = (min, max) => {
-  var rand = Math.floor(Math.random() * (max - min + 1) + min); //Generate Random number between 5 - 15
+  var rand = Math.floor(Math.random() * (max - min + 1) + min); //Generate Random number between two numbers
   return rand;
 };
 

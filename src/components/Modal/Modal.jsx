@@ -1,29 +1,37 @@
 import React from "react";
 
 import { useSelector } from "react-redux";
-import useStickyState from "../../hooks/useStickyState";
 
 import ModalComponents from "./ModalComponents";
 
 import "./style.scss";
 
-const Modal = ({ title, show }) => {
+const Modal = ({
+  title,
+  show,
+  setCurrentScore,
+  currentScore,
+  setCurrentTimer,
+}) => {
   const buzz_state = useSelector((state) => state.buzz); // redux state getter
-
-  const [currentScore, setCurrentScore] = useStickyState(0, "currentScore"); // custom hook to store in localstorage
 
   const titleColor = title === "SUCCESS" ? "green" : "red";
 
   const startNewRound = async () => {
     const newScore = currentScore + buzz_state.round_points;
+    const newTimer = buzz_state.countdown_timer - 200; // 0.2 seconds
     setCurrentScore(newScore); // 1. save current score in localstorage
-    window.location.reload(); // 2. reload page
+    if (newTimer >= buzz_state.countdown_timer / 5) {
+      setCurrentTimer(newTimer); // 2. save current timer in localstorage until it reaches 1/5 initial timer
+    }
+
+    window.location.reload(); // 3. reload page
   };
 
-  const tryAgain = () => { 
+  const tryAgain = () => {
     localStorage.clear();
     window.location.reload();
-  }
+  };
 
   if (!show) {
     return null;
@@ -36,10 +44,13 @@ const Modal = ({ title, show }) => {
           <h2 className={`modal-title ${titleColor}`}>{title}</h2>
         </div>
         {/*  BODY */}
-          <ModalComponents.Body />
+        <ModalComponents.Body />
         {/* FOOTER */}
-        <ModalComponents.Footer title={title} startNewRound={startNewRound} tryAgain={tryAgain}/>
-
+        <ModalComponents.Footer
+          title={title}
+          startNewRound={startNewRound}
+          tryAgain={tryAgain}
+        />
       </div>
     </div>
   );

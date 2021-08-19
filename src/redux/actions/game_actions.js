@@ -5,7 +5,6 @@ import {
   GAME_OVER,
   TOGGLE_MODAL,
   STOP_GAME,
-  NEXT_LAP,
 } from "../constants/types";
 
 export const cleanStates = () => {
