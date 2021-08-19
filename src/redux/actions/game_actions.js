@@ -4,7 +4,8 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
-  STOP_GAME
+  STOP_GAME,
+  NEXT_LAP,
 } from "../constants/types";
 
 export const cleanStates = () => {
@@ -16,7 +17,7 @@ export const cleanStates = () => {
 export const gameOver = (time) => {
   return {
     type: GAME_OVER,
-    current_time: '0'
+    current_time: time,
   };
 };
 
@@ -36,7 +37,7 @@ export const onClickBuzz = (color, time) => {
   return {
     type: STOP_GAME,
     choosen_color: color,
-    click_time: time.milliseconds
+    click_time: time.milliseconds,
   };
 };
 

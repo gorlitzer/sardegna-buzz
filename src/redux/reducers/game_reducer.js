@@ -5,6 +5,7 @@ import {
   GAME_OVER,
   TOGGLE_MODAL,
   STOP_GAME,
+  NEXT_LAP
 } from "../constants/types";
 
 const initialState = {
@@ -42,7 +43,7 @@ export function game_reducer(state = initialState, action) {
         ...state,
         is_playing: false,
         game_over: true,
-        click_time: action.time,
+        click_time: action.current_time,
       };
     // Game modal handler
     case TOGGLE_MODAL:
@@ -84,6 +85,12 @@ export function game_reducer(state = initialState, action) {
           choosen_color: action.choosen_color,
         };
       }
+    // Continue game 
+    case NEXT_LAP:
+      return {
+        ...state,
+        score: action.round_points,
+      };
     // Clean up states
     case CLEAN_STATE:
       return initialState;

@@ -44,7 +44,7 @@
       h4 {
         margin: 0.25rem;
       }
-  
+
       .flex-list {
         display: flex;
         flex-wrap: nowrap;
@@ -72,6 +72,10 @@
     border: 4px solid #494949 !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
+
+    span {
+      color: black;
+    }
 
     &:hover {
       color: #ffffff !important;

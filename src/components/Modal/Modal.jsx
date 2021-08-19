@@ -4,13 +4,27 @@ import { Link } from "react-router-dom";
 import SquareSVG from "../SquareSVG";
 
 import { useSelector } from "react-redux";
+import useStickyState from "../../hooks/useStickyState";
 
 import "./style.scss";
 
 const Modal = ({ title, show }) => {
   const buzz_state = useSelector((state) => state.buzz); // redux state getter
 
+  const [currentScore, setCurrentScore] = useStickyState(0, "currentScore"); // custom hook to store in localstorage
+
   const titleColor = title === "SUCCESS" ? "green" : "red";
+
+  const startNewRound = async () => {
+    const newScore = currentScore + buzz_state.round_points;
+    setCurrentScore(newScore); // 1. save current score in localstorage
+    window.location.reload(); // 2. reload page
+  };
+
+  const tryAgain = () => { 
+    localStorage.clear();
+    window.location.reload();
+  }
 
   if (!show) {
     return null;
@@ -52,9 +66,9 @@ const Modal = ({ title, show }) => {
         {/* FOOTER */}
         <div className="modal-footer">
           {title === "SUCCESS" ? (
-            <button className="modal-button">
+            <button className="modal-button" onClick={() => startNewRound()}>
               <h2>
-                <Link to="/">NEXT LAP →</Link>
+                <span>NEXT LAP →</span>
               </h2>
             </button>
           ) : (
@@ -66,10 +80,10 @@ const Modal = ({ title, show }) => {
               </button>
               <button
                 className="modal-button"
-                onClick={() => window.location.reload()}
+                onClick={() => tryAgain()}
               >
                 <h2>
-                  <a>TRY AGAIN ⟳</a>
+                  <span>TRY AGAIN ⟳</span>
                 </h2>
               </button>
             </>

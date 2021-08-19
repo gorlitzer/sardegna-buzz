@@ -10,6 +10,7 @@ const Landing = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    localStorage.clear();
     dispatch(cleanStates());
   }, []);
 
