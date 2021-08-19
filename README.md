@@ -4,7 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 I'm bootstraping the app with CRA for fast prototyping, but the **CRA** library develops a bare project with a `"@babel/core"` dependency conflict. In order to work-around this issue it is needed to change, in `the package.json`'s, version to `"@babel/core": "^7.13.0"`
 
-### 1. [react router for SPA development](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
+### How to run the app:
+
+1. install required dependencies with: `npm run install`
+2. run the application with: `npm run start`
 
 ### npm packages - external necessary libraries
 
