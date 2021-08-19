@@ -4,15 +4,9 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
-  STOP_TIMER,
+  STOP_GAME,
   STOPWATCH
 } from "../constants/types";
-
-export const stopwatch = () => {
-  return {
-    type: STOPWATCH,
-  };
-};
 
 export const cleanStates = () => {
   return {
@@ -41,7 +35,7 @@ export const setIsPlaying = () => {
 
 export const onClickBuzz = (color, time) => {
   return {
-    type: STOP_TIMER,
+    type: STOP_GAME,
     choosen_color: color,
     click_time: time.milliseconds
   };

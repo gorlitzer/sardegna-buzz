@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import SquareSVG from "../SquareSVG";
-import { useSelector, useDispatch } from "react-redux";
+
+import { useSelector } from "react-redux";
 
 import "./style.scss";
 
@@ -34,7 +35,9 @@ const Modal = ({ title, show }) => {
             <li>
               <h4>
                 Your time:&nbsp;
-                {buzz_state.click_time || buzz_state.countdown_timer + 1} ms
+                {buzz_state.countdown_timer - buzz_state.click_time ||
+                  buzz_state.countdown_timer + 1}
+                ms
               </h4>
             </li>
             <li className="flex-list">
@@ -53,9 +56,12 @@ const Modal = ({ title, show }) => {
               <Link to="/">← GO BACK</Link>
             </h2>
           </button>
-          <button className="modal-button" /* onClick={props.onClose} */>
+          <button
+            className="modal-button"
+            onClick={() => window.location.reload()}
+          >
             <h2>
-              <Link to="/">TRY AGAIN ⟳</Link>
+              <a>TRY AGAIN ⟳</a>
             </h2>
           </button>
         </div>

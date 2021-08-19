@@ -79,5 +79,9 @@
       border-color: var(--primary) !important;
       transition: all 0.4s ease 0s;
     }
+
+    h2 {
+      cursor: pointer;
+    }
   }
 }
