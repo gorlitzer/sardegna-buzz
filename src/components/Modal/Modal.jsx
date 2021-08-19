@@ -45,25 +45,35 @@ const Modal = ({ title, show }) => {
               <SquareSVG infill={buzz_state.choosen_color ?? "#e0e0e0"} />
             </li>
             <li>
-              <h4>Earned points:&nbsp;{buzz_state.score} </h4>
+              <h4>Earned points:&nbsp;{buzz_state.round_points} </h4>
             </li>
           </ul>
         </section>
         {/* FOOTER */}
         <div className="modal-footer">
-          <button className="modal-button">
-            <h2>
-              <Link to="/">← GO BACK</Link>
-            </h2>
-          </button>
-          <button
-            className="modal-button"
-            onClick={() => window.location.reload()}
-          >
-            <h2>
-              <a>TRY AGAIN ⟳</a>
-            </h2>
-          </button>
+          {title === "SUCCESS" ? (
+            <button className="modal-button">
+              <h2>
+                <Link to="/">NEXT LAP →</Link>
+              </h2>
+            </button>
+          ) : (
+            <>
+              <button className="modal-button">
+                <h2>
+                  <Link to="/">← GO BACK</Link>
+                </h2>
+              </button>
+              <button
+                className="modal-button"
+                onClick={() => window.location.reload()}
+              >
+                <h2>
+                  <a>TRY AGAIN ⟳</a>
+                </h2>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

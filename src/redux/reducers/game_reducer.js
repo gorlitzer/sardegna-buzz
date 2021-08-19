@@ -4,7 +4,7 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
-  STOP_GAME
+  STOP_GAME,
 } from "../constants/types";
 
 const initialState = {
@@ -18,6 +18,7 @@ const initialState = {
   choosen_color: null, // clicked color
   current_level: 0, // level helper for 'countdown_timer' decrease
   score: 0, // current player score
+  round_points: 0, // last round earned points
 };
 
 export function game_reducer(state = initialState, action) {
@@ -49,9 +50,21 @@ export function game_reducer(state = initialState, action) {
         ...state,
         show_modal: !state.show_modal,
       };
-    // Click buzz button handler
+    // End game handler
     case STOP_GAME:
+      let best = state.countdown_timer / 3,
+        good = state.countdown_timer * (2 / 3),
+        elapsedTime = state.countdown_timer - action.click_time,
+        earnedPoints = 10;
+
       if (action.choosen_color === state.color) {
+        // game points logic
+        if (elapsedTime <= best) {
+          earnedPoints = 50;
+        } else if (elapsedTime > best && elapsedTime <= good) {
+          earnedPoints = 25;
+        }
+
         return {
           ...state,
           is_playing: false,
@@ -59,7 +72,8 @@ export function game_reducer(state = initialState, action) {
           current_level: state.current_level + 1,
           show_modal: true,
           click_time: action.click_time,
-          choosen_color: action.choosen_color
+          choosen_color: action.choosen_color,
+          round_points: earnedPoints,
         };
       } else {
         return {
@@ -67,7 +81,7 @@ export function game_reducer(state = initialState, action) {
           is_playing: false,
           show_modal: true,
           click_time: action.click_time,
-          choosen_color: action.choosen_color
+          choosen_color: action.choosen_color,
         };
       }
     // Clean up states

@@ -17,7 +17,7 @@ const UIelements = ({ toggleModal, time, setTime }) => {
         <h3>
           <Link to="/">← EXIT</Link>
         </h3>
-        <h3>SCORE: 0</h3>
+        <h3>SCORE: {buzz_state.score}</h3>
       </div>
       <div className="helper-container">
         <Countdown

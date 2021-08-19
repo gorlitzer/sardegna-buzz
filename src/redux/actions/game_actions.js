@@ -4,8 +4,7 @@ import {
   HANDLE_TIME,
   GAME_OVER,
   TOGGLE_MODAL,
-  STOP_GAME,
-  STOPWATCH
+  STOP_GAME
 } from "../constants/types";
 
 export const cleanStates = () => {
