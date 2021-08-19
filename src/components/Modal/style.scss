@@ -36,20 +36,22 @@
     padding: 1rem;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-  }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
 
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-
-    &:hover,
-    &:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
+      h4 {
+        margin: 0.25rem;
+      }
+  
+      .flex-list {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 
