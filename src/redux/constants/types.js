@@ -6,3 +6,4 @@ export const TOGGLE_MODAL = "TOGGLE_MODAL";
 export const STOP_GAME = "STOP_GAME";
 export const SET_LEADERBOARD = "SET_LEADERBOARD";
 export const UPDATE_LEADERBOARD = "UPDATE_LEADERBOARD";
+export const CLEAN_RECORD = "CLEAN_RECORD";

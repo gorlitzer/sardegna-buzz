@@ -1,6 +1,7 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cleanNewRecord } from "../../redux/actions/leaderboard_actions";
 
 import ModalComponents from "./ModalComponents";
 
@@ -13,6 +14,7 @@ const Modal = ({
   currentScore,
   setCurrentTimer,
 }) => {
+  const dispatch = useDispatch();
   const buzz_state = useSelector((state) => state.buzz); // redux state getter
 
   const titleColor = title === "SUCCESS" ? "green" : "red";
@@ -30,6 +32,7 @@ const Modal = ({
 
   const tryAgain = () => {
     localStorage.clear();
+    dispatch(cleanNewRecord());
     window.location.reload();
   };
 
@@ -44,7 +47,7 @@ const Modal = ({
           <h2 className={`modal-title ${titleColor}`}>{title}</h2>
         </div>
         {/*  BODY */}
-        <ModalComponents.Body title={title}/>
+        <ModalComponents.Body title={title} />
         {/* FOOTER */}
         <ModalComponents.Footer
           title={title}

@@ -1,12 +1,21 @@
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 // redux imports
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cleanNewRecord } from "../../redux/actions/leaderboard_actions";
 
 import "./style.scss";
 
 const Leaderboard = () => {
+  const dispatch = useDispatch();
+
   const leaderboar_state = useSelector((state) => state.board); // redux state getter
+
+  useEffect(() => {
+    localStorage.clear();
+    dispatch(cleanNewRecord());
+  }, []);
 
   return (
     <div className="leaderboard-component">

@@ -1,4 +1,4 @@
-import { SET_LEADERBOARD, UPDATE_LEADERBOARD } from "../constants/types";
+import { SET_LEADERBOARD, UPDATE_LEADERBOARD, CLEAN_RECORD } from "../constants/types";
 
 const initialState = {
   topTen: [],
@@ -32,7 +32,7 @@ export function leaderboard_reducer(state = initialState, action) {
       }
       // 2. check for new personal record
       for (var i in newTopTen) {
-        if (newTopTen[i].name === action.name.toUpperCase()) {
+        if (state.topTen[i].name === action.name.toUpperCase()) {
           isRecord = true
           break;
         }
@@ -44,6 +44,11 @@ export function leaderboard_reducer(state = initialState, action) {
         topTen: newTopTen,
         isRecord: isRecord
       };
+      case CLEAN_RECORD:
+        return {
+          ...state,
+          isRecord: false,
+        };
     default:
       return state;
   }

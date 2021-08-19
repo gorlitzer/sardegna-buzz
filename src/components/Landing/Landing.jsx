@@ -5,6 +5,7 @@ import "./style.scss";
 // redux imports
 import { useDispatch } from "react-redux";
 import { cleanStates } from "../../redux/actions/game_actions";
+import { cleanNewRecord } from "../../redux/actions/leaderboard_actions";
 
 const Landing = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Landing = () => {
   useEffect(() => {
     localStorage.clear();
     dispatch(cleanStates());
+    dispatch(cleanNewRecord());
   }, []);
 
   return (

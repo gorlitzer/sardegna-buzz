@@ -1,4 +1,4 @@
-import { SET_LEADERBOARD, UPDATE_LEADERBOARD } from "../constants/types";
+import { SET_LEADERBOARD, UPDATE_LEADERBOARD, CLEAN_RECORD } from "../constants/types";
 
 const axios = require("axios");
 
@@ -25,5 +25,11 @@ export const updateLeaderboard = (name, score) => {
     type: UPDATE_LEADERBOARD,
     name: name,
     score: score
+  };
+};
+
+export const cleanNewRecord = () => {
+  return {
+    type: CLEAN_RECORD,
   };
 };
