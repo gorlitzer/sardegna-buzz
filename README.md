@@ -6,7 +6,7 @@ I'm bootstraping the app with CRA for fast prototyping, but the **CRA** library 
 
 ### 1. [react router for SPA development](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
 
-### V1 npm packages - external necessary libraries
+### npm packages - external necessary libraries
 
 ```
 node-sass // SCSS compiler for webpack bundle
@@ -15,4 +15,5 @@ react-router-dom // SPA management
 redux
 react-redux 
 redux-thunk // async redux management
+axios // deal with server endpoint
 ```

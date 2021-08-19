@@ -1,3 +1,7 @@
+import { SET_LEADERBOARD } from "../constants/types";
+
+const axios = require("axios");
+
 export const setLeaderboard = (array) => {
   return {
     type: SET_LEADERBOARD,
@@ -5,22 +9,13 @@ export const setLeaderboard = (array) => {
   };
 };
 
-// Handle HTTP errors since fetch won't.
-const handleErrors = (response) => {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-};
-
 export const getLeaderboardAsync = () => {
   return (dispatch) => {
-    return fetch("/") // 1. get data - hardcoded endpoint API from personal nodeJS server
-      .then(handleErrors) // 2. handle errors for fetch call
-      .then((res) => res.json()) // 3. parse json object
-      .then((json) => {
-        dispatch(setLeaderboard(json.products));
-      }) // 4. set current data
+    return axios
+      .get("https://sardegna-express.herokuapp.com/leaderboard") //get data - hardcoded endpoint API from personal nodeJS server
+      .then(({ data }) => {
+        dispatch(setLeaderboard(data));
+      })
       .catch((error) => console.log(error));
   };
 };
