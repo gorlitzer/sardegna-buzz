@@ -74,13 +74,6 @@ const BuzzButtons = ({ time }) => {
     },
   ];
 
-  // Schwartzian transform JavaScript implementation - https://stackoverflow.com/a/46545530
-  // NON UTILIZZATA AL MOMENTO PERCHE MANDA IN PALLA IL RENDER
-  const shuffled = buzz_buttons
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-
   return (
     <div className="flex-row">
       {/* Buzz input buttons */}

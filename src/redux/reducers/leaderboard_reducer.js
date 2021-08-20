@@ -31,8 +31,8 @@ export function leaderboard_reducer(state = initialState, action) {
         }
       }
       // 2. check for new personal record
-      for (var i in newTopTen) {
-        if (state.topTen[i].name === action.name.toUpperCase()) {
+      for (var j in newTopTen) {
+        if (state.topTen[j].score <= action.score && state.topTen[j].name === action.name.toUpperCase()) {
           isRecord = true
           break;
         }
